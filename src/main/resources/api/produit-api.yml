@@ -1,0 +1,112 @@
+openapi: "3.0.0"
+info:
+  title: API des animaux
+  version: "1.0.0"
+
+paths:
+  /pets:
+    get:
+      summary: Lister tous les animaux
+      operationId: listPets
+      tags:
+        - pets
+      parameters:
+        - name: limit
+          in: query
+          description: Nombre maximum d’animaux à retourner
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Liste des animaux
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pet'
+        'default':
+          description: Erreur inattendue
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Créer un animal
+      operationId: createPets
+      tags:
+        - pets
+      requestBody:
+        description: Animal à ajouter à la base de données
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pet'
+      responses:
+        '201':
+          description: Animal créé avec succès
+        'default':
+          description: Erreur inattendue
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /pets/{petId}:
+    get:
+      summary: Informations sur un animal spécifique
+      operationId: showPetById
+      tags:
+        - pets
+      parameters:
+        - name: petId
+          in: path
+          required: true
+          description: ID de l'animal à récupérer
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Détails de l’animal
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        'default':
+          description: Erreur inattendue
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    Pet:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        tag:
+          type: string
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+
