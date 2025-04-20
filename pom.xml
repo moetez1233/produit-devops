@@ -137,7 +137,9 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
 		</plugins>
+		<finalName>poc-produit</finalName>
 	</build>
 
 </project>

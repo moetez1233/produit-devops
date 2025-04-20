@@ -13,6 +13,10 @@ public class ProduitControllerApi implements ProduitApi {
 
     @Override
     public ResponseEntity<List<Produit>> getAllProduits() {
-        return ResponseEntity.ok(Collections.emptyList());
+        Produit produit = new Produit();
+        produit.setId(1L);
+        produit.code("Produit 1");
+        List<Produit> produits = List.of(produit);
+        return ResponseEntity.ok(produits);
     }
 }
