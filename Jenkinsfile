@@ -30,5 +30,16 @@ pipeline {
                 }
             }
         }
+         stage('deploy application') {
+                    steps {
+                        script{
+                            withCredentials([string(credentialsId: 'dockerhubpass', variable: 'dockerhubpass')]) {
+                               sh "docker run -d -p 9090:9090 madmoetez/poc-produit:1.0"
+                            }
+
+                        }
+                    }
+         }
+
     }
 }
