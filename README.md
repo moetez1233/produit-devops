@@ -9,8 +9,20 @@ This project implements a backend API for managing products and pets, leveraging
 | **OpenAPI** | Automatically generates API documentation and structure for the Product and Pet endpoints. |
 | **Dockerfile** | Defines the instructions to build the project's standardized Docker image. |
 | **Jenkinsfile** | Contains CI/CD pipelines for automating the development lifecycle, including: <ul><li>Building the project artifacts.</li><li>Building and pushing the Docker image to **Docker Hub**.</li><li>Executing the Docker image on port **9090**.</li></ul> |
+| **Kubernetes** | Orchestrates and manages the containerized application, ensuring high availability, scalability, and automated deployments. |
 
 ---
+
+## ☁️ Understanding Kubernetes Architecture
+
+Kubernetes manages containerized applications by grouping containers into logical units for easy management and discovery. Here are the core components:
+
+* **Cluster**: The foundation of Kubernetes, consisting of a set of worker machines, called nodes, that run containerized applications. Every cluster has at least one worker node.
+* **Minikube**: A tool that runs a single-node Kubernetes cluster on your personal computer, ideal for local development and testing.
+* **Node**: A worker machine (VM or physical) in a Kubernetes cluster that runs pods. Each node is managed by the Kubernetes control plane and contains the necessary services to run Pods (kubelet, container runtime like Docker).
+* **Pod**: The smallest deployable unit in Kubernetes. A Pod represents a single instance of a running process in your cluster. Pods typically contain one or more containers (e.g., your application container and a sidecar container).
+* **Container**: A lightweight, standalone, executable package of software that includes everything needed to run an application: code, runtime, system tools, system libraries, and settings. (e.g., your Spring Boot app running inside a Docker container).
+
 
 ## 🛠️ Usage Example
 
@@ -68,4 +80,6 @@ This section provides a quick reference for the most common `kubectl` commands, 
 ### Monitoring and Metrics (Static)
 
 | Command | Description | Example |
-| :--- | :
+| :--- | :--- | :--- |
+| **Show Node Metrics** | Shows CPU and Memory usage for all Nodes (requires Metrics Server). | `kubectl top nodes` |
+| **Show Pod Metrics** | Shows CPU and Memory usage for all Pods across all namespaces. | `kubectl top pods -A` |
