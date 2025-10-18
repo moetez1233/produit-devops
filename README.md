@@ -23,6 +23,7 @@ Kubernetes manages containerized applications by grouping containers into logica
 * **Pod**: The smallest deployable unit in Kubernetes. A Pod represents a single instance of a running process in your cluster. Pods typically contain one or more containers (e.g., your application container and a sidecar container).
 * **Container**: A lightweight, standalone, executable package of software that includes everything needed to run an application: code, runtime, system tools, system libraries, and settings. (e.g., your Spring Boot app running inside a Docker container).
 
+---
 
 ## 🛠️ Usage Example
 
@@ -56,9 +57,20 @@ This section provides a quick reference for the most common `kubectl` commands, 
 | Command | Description | Example |
 | :--- | :--- | :--- |
 | **List Pods** | Shows a list of all Pods in the current namespace. | `kubectl get pod` |
-| **Create Pod** | Creates a Pod (or any resource) from a YAML manifest file. | `kubectl apply -f produitPod.yaml` |
+| **Create Pod (YAML)** | Creates a Pod (or any resource) from a YAML manifest file. | `kubectl apply -f produitPod.yaml` |
+| **Create Pod (Run)** | Creates and runs a single Pod directly from specific image. | `kubectl run demopod --image=nginx` |
+| **Enter Pod Shell** | Executes an interactive shell (`sh`) inside a running container within a Pod. | `kubectl exec -it podName -- sh` |
 | **Delete Pod** | Deletes a Pod by its name. | `kubectl delete pod produit` |
 | **Get Details** | Shows detailed information (events, status, configuration) about a specific Pod. | `kubectl describe pod produit` |
+| **Port Forward** | Redirects a local port (2224) to a port (80) on the specified Pod. | `kubectl port-forward demopod 2224:80` |
+
+### Configuration Management (ConfigMaps)
+
+| Command | Description | Example |
+| :--- | :--- | :--- |
+| **List ConfigMaps** | Shows a list of all ConfigMaps in the current namespace. | `kubectl get configmaps` |
+| **Create from File** | Creates a new ConfigMap, populating it with data from a local file. | `kubectl create cm dem-heros --from-file=/home/motez/Desktop/workSpace/configmapdemo/heros.txt` |
+| **Get Details** | Shows detailed information about a specific ConfigMap. | `kubectl describe configmap dem-heros` |
 
 ### Deployment and Resource Management
 
